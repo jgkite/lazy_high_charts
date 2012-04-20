@@ -40,13 +40,15 @@ module LazyHighCharts
           options = { #{options_collection.join(",")} };
           #{capture(&block) if block_given?}
           chart = new Highcharts.#{type}(options);
+
+          window.chart_#{object.options[:chart][:renderTo]} = chart;
         };
       })()
       </script>
       EOJS
 
       if defined?(raw)
-        return raw(graph) 
+        return raw(graph)
       else
         return graph
       end
